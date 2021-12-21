@@ -1,6 +1,5 @@
 // require dependencies
 const express = require('express')
-const { send } = require('express/lib/response')
 const port = 3000
 
 // initialize the express app
@@ -21,13 +20,17 @@ app.get("/greeting/:name", (req, res) => {
 })
 
 app.get("/tip/:total/:tipPercentage", (req, res) => {
-  res.send()
+  let decimal = parseFloat(req.params.tipPercentage/100)
+  console.log(decimal)
+  let totalTip = parseFloat((req.params.total) * decimal)
+  console.log(totalTip)
+  res.send(`This is your toal tip: ${totalTip}`)
 })
+
+
 
 // tell the app to listen for requests
 
 app.listen(port, () => {
   console.log(`Express is listening on port: ${port}`)
 })
-
-hello
